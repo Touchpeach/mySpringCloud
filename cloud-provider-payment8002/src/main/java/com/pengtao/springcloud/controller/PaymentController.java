@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 /**
  * pengtao
@@ -45,5 +46,11 @@ public class PaymentController {
         }else {
             return new CommonResult(400,"失败");
         }
+    }
+
+    @GetMapping(value = "/payment/feign/timeout")
+    public String paymentFeignTimeout(){
+        try { TimeUnit.SECONDS.sleep(3); }catch (Exception e) {e.printStackTrace();}
+        return serverPort;
     }
 }
