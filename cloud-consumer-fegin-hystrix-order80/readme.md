@@ -1,0 +1,3 @@
+以实现PaymentHestrixService接口的形式是比较优雅的降级方式
+
+hystrix没有做限流的操作
