@@ -40,6 +40,17 @@ public class PaymentController {
         return result;
     }
 
+
+    @GetMapping("/payment/circuit/{id}")
+    //@HystrixCommand(fallbackMethod = "paymentTimeOutFallbackMethod",commandProperties = {
+    //        @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "1500")  //3秒钟以内就是正常的业务逻辑
+    //})
+    @HystrixCommand
+    public String paymentCircuitBreaker(@PathVariable("id") Integer id){
+        String result = paymentHystrixService.paymentCircuitBreaker(id);
+        return result;
+    }
+
     //兜底方法
     public String paymentTimeOutFallbackMethod(@PathVariable("id") Integer id){
         log.info("80消费者报错兜底");
